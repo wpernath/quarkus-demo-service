@@ -1,0 +1,15 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+    app.kubernetes.io/name: demo-service
+    app.kubernetes.io/version: v0.0.1
+  name: demo-service
+spec:
+  port:
+    targetPort: http
+  to:
+    kind: Service
+    name: demo-service
+    weight: 100
+  wildcardPolicy: None

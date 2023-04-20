@@ -1,0 +1,6 @@
+Cool Report for Wolfgang
+
+{#for person in persons }
+    {person.id}, {person.firstName}, {person.lastName}
+{/for}
+
