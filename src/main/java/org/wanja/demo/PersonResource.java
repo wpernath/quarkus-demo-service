@@ -41,6 +41,12 @@ public class PersonResource {
         return Person.listAll();
     }
 
+    @GET
+    @Path("{sal}")
+    public List<Person> allPersonsBySalutation(Salutation sal) {
+        return Person.findBySalutation(sal);
+    }
+
     @Operation(
         summary = "Creating a new person",
         description = "Method to create a new person in the internal database"
