@@ -90,6 +90,7 @@ spec:
           value: latest
       runAfter:
         - build-push-native-image
+        #- package
       taskRef:
         kind: ClusterTask
         name: openshift-client
