@@ -15,7 +15,7 @@ spec:
     - description: Password of the target repository
       name: repo-pwd
       type: string
-    - default: pipe-test
+    - default: qd1
       description: ns to deploy this app to
       name: namespace
       type: string
@@ -89,7 +89,7 @@ spec:
         - name: VERSION
           value: latest
       runAfter:
-        - build-push-native-image
+        - build-push-jvm-image
         #- package
       taskRef:
         kind: ClusterTask
@@ -97,7 +97,7 @@ spec:
       workspaces:
         - name: manifest-dir
           workspace: the-sources
-    - name: build-push-native-image
+    - name: build-push-jvm-image
       params:
         - name: GOALS
           value:
