@@ -12,7 +12,8 @@ spec:
     This Task can be used to run a Maven build. The only difference to 
     the original one from github.com/tektoncd/catalog is that it uses an 
     optional local maven repo path to cache all the dependencies. And it requires a
-    a maven-settings workspace. 
+    a maven-settings workspace. Also, it is capable of building Quarkus native builds by 
+    utilizing the quarkus-graalvm image.
   workspaces:
     - name: source
       description: The workspace consisting of maven project.

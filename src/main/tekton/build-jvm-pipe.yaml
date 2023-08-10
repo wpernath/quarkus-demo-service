@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  name: build-native-demo-service
+  name: build-jvm-demo-service
 spec:
   params:
     - default: 'https://github.com/wpernath/quarkus-demo-service'
@@ -102,7 +102,6 @@ spec:
         - name: GOALS
           value:
             - package
-            - '-Dnative'
             - '-Dquarkus.container-image.push=true'
             - '-Dquarkus.native.container-build=false'
             - '-Dquarkus.container-image.username=$(params.repo-user)'
