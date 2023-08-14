@@ -14,5 +14,5 @@ spec:
     name: demo-service
     weight: 100
   port:
-    targetPort: 8080-tcp
+    targetPort: http
   wildcardPolicy: None
