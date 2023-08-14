@@ -12,6 +12,7 @@
 target/
 .mvn/
 .vscode/
+target/
 
 # Package Files #
 *.jar
