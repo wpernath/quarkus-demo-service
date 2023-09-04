@@ -15,7 +15,7 @@ spec:
     - description: Password of the target repository
       name: repo-pwd
       type: string
-    - default: pipe-test
+    - default: qd1
       description: ns to deploy this app to
       name: namespace
       type: string
