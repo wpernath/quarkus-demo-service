@@ -56,7 +56,7 @@ spec:
       command: ["/usr/bin/mvn"]
       args:
         - -B
-        - -s
-        - $(workspaces.maven-settings.path)/settings.xml
+#        - -s
+#        - $(workspaces.maven-settings.path)/settings.xml
         - -Dmaven.repo.local=$(workspaces.source.path)/MAVEN_MIRROR
         - "$(params.GOALS)"
