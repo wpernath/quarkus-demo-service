@@ -14,6 +14,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 public class KafkaConsumer {
     AtomicLong msgNumber = new AtomicLong(0);
 
+    
     //@Channel("kafka")
     //Emitter<String> emitter;
 
@@ -22,12 +23,12 @@ public class KafkaConsumer {
         Log.info("Kafka consumed: " + message);
     }
 
-    /*
+    
     @Scheduled(every = "1s")
     public void produceKafkaMessage() {
         String message = "Menno: " + msgNumber.getAndIncrement();
         Log.info("Scheduler is creating a new kafka message");
-        emitter.send(message);
+        //emitter.send(message);
      }
-     */
+    
 }
