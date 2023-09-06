@@ -1,0 +1,118 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: hello-world-pipe2
+spec:
+  params:
+    - default: 'https://github.com/wpernath/quarkus-demo-service'
+      name: git-url
+      type: string
+    - default: quarkus-3.2
+      name: git-branch
+      type: string
+    - default: wpernath
+      name: repo-user
+      type: string
+    - name: repo-pass
+      type: string
+    - default: qd1
+      name: target-namespace
+      type: string
+  tasks:
+    - name: git-clone
+      params:
+        - name: url
+          value: $(params.git-url)
+        - name: revision
+          value: $(params.git-branch)
+        - name: refspec
+          value: ''
+        - name: submodules
+          value: 'true'
+        - name: depth
+          value: '1'
+        - name: sslVerify
+          value: 'true'
+        - name: crtFileName
+          value: ca-bundle.crt
+        - name: subdirectory
+          value: the-sources
+        - name: sparseCheckoutDirectories
+          value: ''
+        - name: deleteExisting
+          value: 'true'
+        - name: httpProxy
+          value: ''
+        - name: httpsProxy
+          value: ''
+        - name: noProxy
+          value: ''
+        - name: verbose
+          value: 'true'
+        - name: gitInitImage
+          value: >-
+            registry.redhat.io/openshift-pipelines/pipelines-git-init-rhel8@sha256:1a50511583fc02a27012d17d942e247813404104ddd282d7e26f99765174392c
+        - name: userHome
+          value: /home/git
+      taskRef:
+        kind: ClusterTask
+        name: git-clone
+      workspaces:
+        - name: output
+          workspace: sources
+    - name: compile
+      params:
+        - name: GOALS
+          value:
+            - clean
+            - compile
+            - '-DskipTests'
+        - name: CONTEXT_DIR
+          value: the-sources/
+      runAfter:
+        - git-clone
+      taskRef:
+        kind: Task
+        name: maven-caching
+      workspaces:
+        - name: source
+          workspace: sources
+        - name: maven-settings
+          workspace: maven-config
+    - name: build-and-push-image
+      params:
+        - name: GOALS
+          value:
+            - package
+            - '-Dquarkus.container-image.push=true'
+            - '-Dquarkus.container-image.username=$(params.repo-user)'
+            - '-Dquarkus.container-image.password=$(params.repo-pass)'
+        - name: CONTEXT_DIR
+          value: the-sources
+      runAfter:
+        - compile
+      taskRef:
+        kind: Task
+        name: maven-caching
+      workspaces:
+        - name: source
+          workspace: sources
+        - name: maven-settings
+          workspace: maven-config
+    - name: deploy
+      params:
+        - name: SCRIPT
+          value: oc apply -f the-sources/target/kubernetes/kubernetes.yml
+        - name: VERSION
+          value: latest
+      runAfter:
+        - build-and-push-image
+      taskRef:
+        kind: ClusterTask
+        name: openshift-client
+      workspaces:
+        - name: manifest-dir
+          workspace: sources
+  workspaces:
+    - name: sources
+    - name: maven-config

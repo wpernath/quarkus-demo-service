@@ -5,26 +5,28 @@
     <meta charset="UTF-8">
     <title>demo-service - v0.0.1</title>
     <script type="text/javascript">
-        
+
         let socket = null;
         let counter = 0;
 
         function sendMessage() {
-            if( socket === null ) {
+            if (socket === null) {
                 socket = new WebSocket("ws://localhost:8080/socket");
             }
 
-            for( let i=0; i<50; i++) {
+            for (let i = 0; i < 50; i++) {
                 socket.send("Counter: " + (counter++));
             }
         }
-        
-        
+
+
 
 
     </script>
 </head>
-<body>    
+
+<body>
     <input type="button" value="Send 50 messages" onclick="sendMessage()" />
 </body>
+
 </html>
