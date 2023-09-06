@@ -89,7 +89,7 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-scheduler</artifactId>
     </dependency>
-        
+
     <dependency>
       <groupId>io.quarkiverse.reactivemessaging.http</groupId>
       <artifactId>quarkus-reactive-messaging-http</artifactId>
