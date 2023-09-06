@@ -14,6 +14,8 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.WebApplicationException;
+import jakarta.ws.rs.core.Response;
 
 @Path("/persons")
 @OpenAPIDefinition(
@@ -43,7 +45,7 @@ public class PersonResource {
 
     @GET
     @Path("{sal}")
-    public List<Person> allPersonsBySalutation(Salutation sal) {
+    public List<Person> allPersonsBySalutation(String sal) {
         return Person.findBySalutation(sal);
     }
 
@@ -67,17 +69,22 @@ public class PersonResource {
     @Transactional
     public Person update(Long id, Person per) {
         Person p = Person.findById(id);
-        if( per.firstName != null ) p.firstName = per.firstName;
-        if( per.lastName != null )  p.lastName  = per.lastName;
-        if( per.salutation != null )p.salutation= per.salutation;
-        p.persist();
+        if( p != null ) {
+            if( per.firstName != null ) p.firstName = per.firstName;
+            if( per.lastName != null )  p.lastName  = per.lastName;
+            if( per.salutation != null )p.salutation= per.salutation;
+            p.persist();
+        }
+        else {
+            throw new WebApplicationException("Person " + id + " not found", Response.Status.NOT_FOUND);
+        }
         return p;
     }
 
     @Operation(
         summary = "Deleting a person",
         description = "Method to delete a person from the internal database"
-    )
+    )    
     @DELETE
     @Transactional
     @Path("{id}")
