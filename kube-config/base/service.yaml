@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    app.quarkus.io/commit-id: d96a019601598f8fac5444901056f299a13b8518
+    app.quarkus.io/build-timestamp: 2024-02-06 - 21:52:22 +0000
+    prometheus.io/scrape: "true"
+    prometheus.io/path: /q/metrics
+    prometheus.io/port: "8080"
+    prometheus.io/scheme: http
+  labels:
+    app.kubernetes.io/name: demo-service
+    app.kubernetes.io/part-of: demo-service
+    app.kubernetes.io/version: 0.0.16-native
+    app.kubernetes.io/managed-by: quarkus
+  name: demo-service
+spec:
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app.kubernetes.io/name: demo-service
+    app.kubernetes.io/part-of: demo-service
+    app.kubernetes.io/version: 0.0.16-native
+  type: ClusterIP
