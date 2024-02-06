@@ -1,0 +1,43 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: demo-dev  
+  namespace: demo-ci
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: demo-dev
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: kube-config/overlays/dev
+    repoURL: https://github.com/wpernath/quarkus-demo-service.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+    - PruneLast=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: demo-stage  
+  namespace: demo-ci
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: demo-stage
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: kube-config/overlays/stage
+    repoURL: https://github.com/wpernath/quarkus-demo-service.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+    - PruneLast=true

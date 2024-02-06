@@ -3,8 +3,11 @@ kind: Kustomization
 
 resources:
 # infra resources
-- maven-task.yaml
-- maven-settings-cm.yaml
-- build-native-pipe.yaml
-- build-jvm-pipe.yaml
+- infra/namespace.yaml
+- infra/argocd.yaml
+
+# app
+- app/ns.yaml
+- app/apps.yaml
+- app/roles.yaml
 
