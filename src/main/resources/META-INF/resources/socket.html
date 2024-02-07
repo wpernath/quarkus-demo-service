@@ -6,14 +6,10 @@
     <title>demo-service - v0.0.1</title>
     <script type="text/javascript">
 
-        let socket = null;
+        let socket = new WebSocket("ws://localhost:8080/socket");;
         let counter = 0;
 
         function sendMessage() {
-            if (socket === null) {
-                socket = new WebSocket("ws://localhost:8080/socket");
-            }
-
             for (let i = 0; i < 50; i++) {
                 socket.send("Counter: " + (counter++));
             }
