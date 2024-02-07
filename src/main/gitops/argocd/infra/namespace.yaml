@@ -4,9 +4,4 @@ metadata:
   annotations:
     openshift.io/description: ""
     openshift.io/display-name: "Demo CI "
-  labels:
-    kubernetes.io/metadata.name: demo-ci    
   name: demo-ci
-spec:
-  finalizers:
-  - kubernetes

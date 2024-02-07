@@ -3,8 +3,8 @@ kind: Application
 metadata:
   name: demo-dev  
   namespace: demo-ci
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
+#  finalizers:
+#    - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     namespace: demo-dev
@@ -25,8 +25,8 @@ kind: Application
 metadata:
   name: demo-stage  
   namespace: demo-ci
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
+#  finalizers:
+#    - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     namespace: demo-stage

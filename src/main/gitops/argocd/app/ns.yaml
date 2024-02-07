@@ -8,9 +8,9 @@ metadata:
     kubernetes.io/metadata.name: demo-dev
     argocd.argoproj.io/managed-by: demo-ci
   name: demo-dev
-spec:
-  finalizers:
-  - kubernetes
+#spec:
+#  finalizers:
+#  - kubernetes
 ---
 apiVersion: v1
 kind: Namespace
@@ -22,6 +22,6 @@ metadata:
     kubernetes.io/metadata.name: demo-stage
     argocd.argoproj.io/managed-by: demo-ci
   name: demo-stage
-spec:
-  finalizers:
-  - kubernetes
+#spec:
+#  finalizers:
+#  - kubernetes
