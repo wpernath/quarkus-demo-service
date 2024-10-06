@@ -41,7 +41,14 @@ spec:
           requests:
             storage: 1Gi
       replicas: 1
-  postgresVersion: 14
+  postgresVersion: 15
+  # make sure that the cat user has access to the public schema
+  users:
+    - name: demo
+      databases:
+        - demo
+      options: 'SUPERUSER'
+
 ---
 apiVersion: kafka.strimzi.io/v1beta2
 kind: Kafka
