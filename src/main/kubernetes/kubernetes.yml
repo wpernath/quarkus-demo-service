@@ -41,7 +41,8 @@ spec:
           requests:
             storage: 1Gi
       replicas: 1
-  postgresVersion: 14
+  postgresVersion: 15
+  
 ---
 apiVersion: kafka.strimzi.io/v1beta2
 kind: Kafka

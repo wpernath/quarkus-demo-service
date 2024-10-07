@@ -29,6 +29,7 @@ spec:
       type: array
       default:
         - "package"
+        - "-DskipTests=true"
     - name: CONTEXT_DIR
       type: string
       description: >-
