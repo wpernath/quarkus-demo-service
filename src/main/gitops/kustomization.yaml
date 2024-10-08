@@ -1,0 +1,21 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+#namespace: demo-ci
+
+resources:
+# infra resources
+- argocd/infra/namespace.yaml
+- argocd/infra/argocd.yaml
+- argocd/infra/route.yaml
+
+# tekton
+#- tekton/maven-settings-cm.yaml
+#- tekton/maven-task.yaml
+#- tekton/build-jvm-pipe.yaml
+#- tekton/build-native-pipe.yaml
+
+# app
+- argocd/app/ns.yaml
+- argocd/app/apps.yaml
+- argocd/app/roles.yaml
+

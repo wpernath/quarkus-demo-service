@@ -1,0 +1,12 @@
+namespace:
+  - kind: Application
+    path: metadata/namespace
+    create: true
+
+  - kind: Task
+    path: metadata/namespace
+    create: true
+
+  - kind: Namespace
+    path: metadata/name
+    create: false
