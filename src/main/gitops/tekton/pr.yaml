@@ -1,0 +1,29 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: hello-world-pipe2-7u7wr02
+  finalizers:
+    - chains.tekton.dev/pipelinerun
+spec:
+  params:
+    - name: git-url
+      value: 'https://github.com/wpernath/quarkus-demo-service'
+    - name: git-branch
+      value: quarkus-3.2
+    - name: repo-user
+      value: wpernath
+    - name: repo-pass
+      value: BF/xcOo6BeLU2YNlbbmy/HKMNzgrNapJiEpWAr6b9n/BgNND1+kO8xGiShNkFufw
+    - name: target-namespace
+      value: qd1
+  pipelineRef:
+    name: hello-world-pipe2
+  serviceAccountName: pipeline
+  timeout: 1h0m0s
+  workspaces:
+    - name: sources
+      persistentVolumeClaim:
+        claimName: pvc-6741ebffdf
+    - configMap:
+        name: maven-settings
+      name: maven-config

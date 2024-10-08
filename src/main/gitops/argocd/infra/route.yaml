@@ -1,0 +1,23 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: argo
+  namespace: demo-ci
+  labels:
+    app.kubernetes.io/component: server
+    app.kubernetes.io/managed-by: argocd
+    app.kubernetes.io/name: argocd-server
+    app.kubernetes.io/part-of: argocd
+  annotations:
+    openshift.io/host.generated: 'true'
+spec:
+  to:
+    kind: Service
+    name: argocd-server
+    weight: 100
+  port:
+    targetPort: http
+  tls:
+    termination: passthrough
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None
