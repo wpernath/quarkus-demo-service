@@ -27,7 +27,7 @@ public class KafkaConsumer {
     @Scheduled(every = "1s")
     public void produceKafkaMessage() {
         String message = "Menno: " + msgNumber.getAndIncrement();
-        Log.info("Scheduler is creating a new kafka message");
+        //Log.info("Scheduler is creating a new kafka message");
         //emitter.send(message);
      }
     
