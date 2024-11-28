@@ -1,2 +1,2 @@
 # quarkus-demo-service
-This is the demo code for the Kubernetes Native Workshop with Quarkus enablement. THE
+This is the demo code for the Kubernetes Native Workshop with Quarkus enablement. 
